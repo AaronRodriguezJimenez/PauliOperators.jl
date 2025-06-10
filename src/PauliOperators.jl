@@ -2,12 +2,13 @@ module PauliOperators
 
     using Printf
     using LinearAlgebra
+    using IterTools
    
 
-    include("helpers.jl")
     include("type_PauliBasis.jl")
     include("type_Pauli.jl")
     include("type_PauliSum.jl")
+    include("helpers.jl")
     include("type_Ket.jl")
     include("type_KetSum.jl")
     include("type_DyadBasis.jl")
@@ -16,6 +17,7 @@ module PauliOperators
     include("multiplication.jl")
     include("addition.jl")
     include("conversions.jl")
+    include("operations.jl")
 
     const ⊗ = otimes
     const ⊕ = osum
