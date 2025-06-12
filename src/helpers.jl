@@ -36,13 +36,21 @@ of the majorana string associated to a Pauli String.
     - If x[i] == true, it flips the control flag and adds 1 to the weight.
  Returns the total weight as an integer.
 """
-function simple_majorana_weight(Pb::PauliBasis{N}) where N
+function simple_majorana_weight(Pb::Union{PauliBasis{N}, Pauli{N}}) where N
     w = 0
     control = true
-    for i in 0:N-1  # bits are indexed from 0
-        zbit = (Pb.z >> i) & 1 != 0
-        xbit = (Pb.x >> i) & 1 != 0
-        if zbit && !xbit && control
+    # tmp = Pb.z & ~Pb.x  # Bitwise AND with bitwise NOT
+    Ibits = ~(Pb.z|Pb.x)
+    Zbits = Pb.z & ~Pb.x
+
+    for i in reverse(1:N)  # Iterate from N down to 1
+        #zbit = (Pb.z >> (i - 1)) & 1 != 0
+        xbit = (Pb.x >> (i - 1)) & 1 != 0
+        Zbit = (Zbits >> (i - 1)) & 1 != 0
+        Ibit = (Ibits >> (i - 1)) & 1 != 0
+#        println("i = $i: tmpbit = $tmpbit, zbit = $zbit, xbit = $xbit")
+
+        if Zbit && control || Ibit && !control
             w += 2
         elseif xbit
             control = !control

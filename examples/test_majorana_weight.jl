@@ -46,8 +46,9 @@ function test_helpers()
 
         majo_weight, majo_str = PauliOperators.pauli_to_majorana_occupation(op)
         pauli_weight = PauliOperators.get_pauli_weight(pauli_str)
+        simple_weight = PauliOperators.simple_majorana_weight(op)
 
-        println("$(i): $pauli_str weight $pauli_weight ==> $majo_str with weight $majo_weight")
+        println("$(i): $pauli_str Pauli weight $pauli_weight ==> Majorana $majo_str with weight $majo_weight compared to simple $simple_weight")
 
         if majo_weight < pauli_weight
             push!(mw_list, majo_weight)
@@ -93,23 +94,32 @@ function test_helpers()
     # # Show example cases
     println("Example case: YXXZZZ")
     pauli_basis = PauliBasis("YXXZZZ")
-    println(PauliOperators.pauli_to_majorana_occupation(pauli_basis))
+    println("simple weight:")
     println(PauliOperators.simple_majorana_weight(pauli_basis))
+    println("pauli to majorana translation weight:")
+    println(PauliOperators.pauli_to_majorana_occupation(pauli_basis)[1])
+    
 
     println("Example case: ZZ")
     pauli_basis = PauliBasis("ZZ")
-    println(PauliOperators.pauli_to_majorana_occupation(pauli_basis))
+    println("simple weight:")
     println(PauliOperators.simple_majorana_weight(pauli_basis))
+    println("pauli to majorana translation weight:")
+    println(PauliOperators.pauli_to_majorana_occupation(pauli_basis)[1])
 
     println("Example case: IXXI")
     pauli_basis = PauliBasis("IXXI")
-    println(PauliOperators.pauli_to_majorana_occupation(pauli_basis))
+    println("simple weight:")
     println(PauliOperators.simple_majorana_weight(pauli_basis))
+    println("pauli to majorana translation weight:")
+    println(PauliOperators.pauli_to_majorana_occupation(pauli_basis)[1])
 
     println("Example case: YZZY")
     pauli_basis = PauliBasis("YZZY")
-    println(PauliOperators.pauli_to_majorana_occupation(pauli_basis))
+    println("simple weight:")
     println(PauliOperators.simple_majorana_weight(pauli_basis))
+    println("pauli to majorana translation weight:")
+    println(PauliOperators.pauli_to_majorana_occupation(pauli_basis)[1])
 end
 
 
