@@ -24,7 +24,7 @@ println("Majorna weight ver 2 is: ", w_two)
 
 # Test fucntions in helpers
 function test_helpers()
-    N = 2
+    N = 4
     n_lower = 0
     mw_list = Int[]
     pw_list = Int[]
@@ -45,7 +45,8 @@ function test_helpers()
         pauli_str = string(op)
 
         majo_weight, majo_str = PauliOperators.pauli_to_majorana_occupation(op)
-        pauli_weight = PauliOperators.get_pauli_weight(pauli_str)
+        pauli_weight = PauliOperators.pauli_weight(op)
+        #pauli_weight = PauliOperators.get_pauli_weight(pauli_str)
         simple_weight = PauliOperators.simple_majorana_weight(op)
 
         println("$(i): $pauli_str Pauli weight $pauli_weight ==> Majorana $majo_str with weight $majo_weight compared to simple $simple_weight")
