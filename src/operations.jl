@@ -62,7 +62,8 @@ negate(p::Pauli{N}) where N = rotate_phase(p, 2)
 True if Pauli basis has only Z and I (i.e., x == 0)
 """
 is_diagonal(p::PauliBasis) = p.x == 0
-is_diagonal(p::Pauli) = is_diagonal(PauliBasis{length(p)}(p.z, p.x))  # or just: p.x == 0
+#is_diagonal(p::Pauli) = is_diagonal(PauliBasis{length(p)}(p.z, p.x))  # or just: p.x == 0
+is_diagonal(p::Pauli{N}) where N = is_diagonal(PauliBasis{N}(p.z, p.x))  # or just: p.x == 0
 
 """
     expectation_value(p::PauliBasis{N}, ket::Ket{N})
