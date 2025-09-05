@@ -92,7 +92,7 @@ Sum over terms
 """
 function expectation_value(p::PauliSum{N}, ket::Ket{N}) where N
     expval = 0.0
-    for (op, coeff) in p.ops
+    for (op, coeff) in p
         expval += coeff * expectation_value(op, ket)
     end
     return expval

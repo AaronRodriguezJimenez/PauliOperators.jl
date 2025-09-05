@@ -300,3 +300,11 @@ function Base.iterate(::Type{Pauli{N}}, state = 1) where N
     bp = PauliBasis{N}(next[1]-1, next[2]-1)
     return Pauli(bp), state+1 
 end
+
+function isidentity(p::Pauli{N}) where {N}
+    pstring = string(p)
+    return all(c -> c == 'I', pstring)
+end
+#Commute funciton for Pauli type
+@inline symplectic_inner(p1::Pauli, p2::Pauli) = count_ones(p1.x & p2.z) - count_ones(p1.z & p2.x)
+@inline commute(p1::Pauli, p2::Pauli) = iseven(symplectic_inner(p1, p2))
