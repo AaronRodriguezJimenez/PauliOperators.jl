@@ -128,7 +128,5 @@ function Base.iterate(::Type{PauliBasis{N}}, state = 1) where N
     next = CartesianIndices((2^N,2^N))[state]
     return PauliBasis{N}(next[1]-1, next[2]-1), state+1 
 end
-
-#Next function was added, not present in this version but present in main version
-@inline symplectic_inner(p1::PauliBasis, p2::PauliBasis) = count_ones(p1.x & p2.z) - count_ones(p1.z & p2.x)
-@inline commute(p1::PauliBasis, p2::PauliBasis) = iseven(symplectic_inner(p1, p2))
+ 
+@inline commute(p1::PauliBasis, p2::PauliBasis) = iseven(count_ones(p1.x & p2.z) - count_ones(p1.z & p2.x)) 
